@@ -16,13 +16,13 @@ Leaf-level screening measurements in files beginning with **li600** were made wi
 
 The following files are available:
 
-1. **data/li600_dataset.csv:** Full LI-COR LI-600/LI-600F porometer/fluorometer dataset of leaf-level measurements for *Protea nitida* adults, *P. nitida* seedlings, and *P. repens* seedlings. Contains stomatal conductance, transpiration-related variables, chlorophyll fluorescence metrics, leaf and sampling metadata, and matched meteorological and Eddy Covariance-derived variables. [Column metadata](markdown/li600_dataset_metadata.md)
-2. **data/li600_dataset_summarised.csv:** Summarised LI-COR LI-600/LI-600F dataset aggregated by timestamp, species, season, daytime, and leaf age. [Column metadata](markdown/li600_dataset_summarised_metadata.md)
-3. **data/li6400_dataset.csv:** LI-COR LI-6400 portable photosynthesis system dataset containing light-response curves, fluorescence light-response curves, and A-Ci measurements. Contains photosynthetic gas exchange variables, fluorescence variables, plant metadata, and matched environmental variables. [Column metadata](markdown/li6400_dataset_metadata.md)
-4. **data/lrc_fitted.csv:** Fitted LI-COR LI-6400 light-response curve parameter table derived from Marshall-Biscoe model fits. [Column metadata](markdown/lrc_fitted_metadata.md)
-5. **data/coef_table_appendix.csv:** Appendix coefficient table linking stomatal conductance and electron transport rate relationships by species or plant type and leaf age. [Column metadata](markdown/coef_table_appendix_metadata.md)
-6. **data/Leaf_morph.xlsx:** Leaf morphology measurements by species or plant type, leaf age, and specimen. [Column metadata](markdown/Leaf_morph_metadata.md)
-7. **data/Chlorophyll Content.xlsx:** Chlorophyll content measurements by barcode. [Column metadata](markdown/Chlorophyll Content_metadata.md)
+1. **data/li600_dataset.csv:** Full LI-COR LI-600/LI-600F porometer/fluorometer dataset of leaf-level measurements for *Protea nitida* adults, *P. nitida* seedlings, and *P. repens* seedlings. Contains stomatal conductance, transpiration-related variables, chlorophyll fluorescence metrics, leaf and sampling metadata, and matched meteorological and Eddy Covariance-derived variables. [Column metadata](metadata/li600_dataset_metadata.md)
+2. **data/li600_dataset_summarised.csv:** Summarised LI-COR LI-600/LI-600F dataset aggregated by timestamp, species, season, daytime, and leaf age. [Column metadata](metadata/li600_dataset_summarised_metadata.md)
+3. **data/li6400_dataset.csv:** LI-COR LI-6400 portable photosynthesis system dataset containing light-response curves, fluorescence light-response curves, and A-Ci measurements. Contains photosynthetic gas exchange variables, fluorescence variables, plant metadata, and matched environmental variables. [Column metadata](metadata/li6400_dataset_metadata.md)
+4. **data/lrc_fitted.csv:** Fitted LI-COR LI-6400 light-response curve parameter table derived from Marshall-Biscoe model fits. [Column metadata](metadata/lrc_fitted_metadata.md)
+5. **data/coef_table_appendix.csv:** Appendix coefficient table linking stomatal conductance and electron transport rate relationships by species or plant type and leaf age. [Column metadata](metadata/coef_table_appendix_metadata.md)
+6. **data/Leaf_morph.xlsx:** Leaf morphology measurements by species or plant type, leaf age, and specimen. [Column metadata](metadata/Leaf_morph_metadata.md)
+7. **data/Chlorophyll Content.xlsx:** Chlorophyll content measurements by barcode. [Column metadata](metadata/Chlorophyll Content_metadata.md)
 8. **stat/:** Statistical analysis and figure-generation scripts for the manuscript. Analyses use Python and R, with dependencies including:
     - [Pandas](https://pandas.pydata.org/)
     - [NumPy](https://numpy.org/)
