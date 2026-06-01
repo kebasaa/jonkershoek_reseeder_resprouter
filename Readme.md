@@ -6,9 +6,9 @@
 
 [![License: CC BY-NC-SA](https://img.shields.io/badge/License-CC%20BY--NC--SA-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 
-# Data & code for article on Fynbos reseeding and resprouting
+# Data & code for article on reseeding and resprouting strategies
 
-The code and datasets in this repository are complementary to the draft manuscript titled "*Life-history trade-offs in the regeneration niche: Post-fire seeding vs. resprouting in Fynbos Proteaceae*" (Muller et al., draft manuscript). The repository contains datasets created for the project in the **data** subfolder and statistical analysis and figure-generation code in the **stat** subfolder.
+The code and datasets in this repository are complementary to the draft manuscript titled "*Life-history trade-offs in the regeneration niche: Stomatal conductance underpins post-fire reseeding vs resprouting strategies*" (Muller et al., draft manuscript). The repository contains datasets created for the project in the **data** subfolder and statistical analysis and figure-generation code in the **stat** subfolder.
 
 This study investigates how post-fire reseeding and resprouting strategies differ in their leaf-level physiology in a fire-prone, summer-drought Fynbos ecosystem. Using measurements from *Protea repens* seedlings, *Protea nitida* seedlings, and *P. nitida* adults at the Jonkershoek Fynbos research site, the project links stomatal conductance, photosynthetic capacity, chlorophyll fluorescence, leaf traits, and meteorological/Eddy Covariance context to test how reseeders and resprouters balance rapid carbon gain against drought resilience during post-fire recovery.
 
@@ -38,7 +38,7 @@ Matched Eddy Covariance and meteorological variables are included in the distrib
 
 ## How to Cite
 
-Muller, J. D., Ramsay, E., Carkeek, R., & Midgley, G. F. (draft manuscript). *Life-history trade-offs in the regeneration niche: Post-fire seeding vs. resprouting in Fynbos Proteaceae*.
+Muller, J. D., Ramsay, E., Carkeek, R., & Midgley, G. F. (draft manuscript). *Life-history trade-offs in the regeneration niche: Stomatal conductance underpins post-fire reseeding vs resprouting strategies*.
 
 ## License
 
