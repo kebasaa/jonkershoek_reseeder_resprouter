@@ -42,7 +42,7 @@ Muller, J. D., Ramsay, E., Carkeek, R., & Midgley, G. F. (draft manuscript). *Li
 
 ## License
 
-This repository is distributed under the Creative Commons Attribution-NonCommercial-ShareAlike license (CC BY-NC-SA 4.0).
+Except where otherwise noted, this repository is distributed under the [Creative Commons Attribution-NonCommercial-ShareAlike license (CC BY-NC-SA 4.0)](https://creativecommons.org/licenses/by-nc-sa/4.0/). See [LICENSE.md](LICENSE.md) for the repository license notice and the Eddy Covariance data exception.
 
 In practical terms, you may copy, redistribute, reuse, and adapt the datasets and code in this repository for non-commercial research, teaching, and other non-commercial purposes, provided that you give appropriate credit to the authors, cite the manuscript or repository, indicate whether changes were made, and share any adapted material under the same CC BY-NC-SA 4.0 terms. You may not use the material for commercial purposes, apply legal or technical restrictions that prevent others from exercising the same license rights, or imply that the authors endorse your reuse.
 
