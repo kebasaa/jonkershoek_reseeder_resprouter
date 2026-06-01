@@ -4,43 +4,48 @@
 ![NumPy](https://img.shields.io/badge/numpy-%23013243.svg?style=for-the-badge&logo=numpy&logoColor=white)
 
 
-[![DOI:10.1111/nph.20424](http://img.shields.io/badge/DOI-10.1111/nph.20424-a7d37d.svg)](https://doi.org/10.1111/nph.20424)
-[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![License: CC BY-NC-SA](https://img.shields.io/badge/License-CC%20BY--NC--SA-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 
-# Data & code for article on leaf CO fluxes
+# Data & code for article on Fynbos reseeding and resprouting
 
-The code in this repository is complementary to the article in New Phytologist titled "*Leaf carbon monoxide emissions under different drought, heat, and light conditions in the field*" (Muller et al., 2025). The following files are available:
+The code and datasets in this repository are complementary to the draft manuscript titled "*Life-history trade-offs in the regeneration niche: Post-fire seeding vs. resprouting in Fynbos Proteaceae*" (Muller et al., draft manuscript). The repository contains datasets created for the project in the **data** subfolder and statistical analysis and figure-generation code in the **stat** subfolder. The following files are available:
 
-1. **data_full.csv:** Gas flux data of H<sub>2</sub>O, CO<sub>2</sub>, and CO, calculated from concentrations measured using the Aerodyne Mini-TILDAS OCS/COS Monitor QCL Laser ([Link to manual](https://www.aerodyne.com/wp-content/uploads/2021/11/OCS_COS.pdf)). Calculation of fluxes was done according to the [Laser-chamber-fluxes Python scripts](https://github.com/kebasaa/Laser-chamber-fluxes). Contains the following variables:
+1. **data/li600_dataset.csv:** Full LI-600F porometer/fluorometer dataset of leaf-level measurements for *Protea nitida* adults, *P. nitida* seedlings, and *P. repens* seedlings. Contains stomatal conductance, transpiration-related variables, chlorophyll fluorescence metrics, leaf and sampling metadata, and matched meteorological and Eddy Covariance-derived variables. Key variables include:
     - _timestamp_: Formatted as YYYY-mm-dd HH:MM:SS
-	- _season_: Defined according to [Alpert et al. (2004)](https://doi.org/10.1002/joc.1037)
-	- _treatment_: Droughted & Irrigated
-	- _co.flux_: Carbon monoxide flux, in nmol m<sup>-2</sup> s<sup>-1</sup>
-	- _co2.flux_: CO<sub>2</sub> flux, in μmol m<sup>-2</sup> s<sup>-1</sup>
-	- _Tr_: Transpiration flux, in mmol m<sup>-2</sup> s<sup>-1</sup>
-	- _PAR_: Photosynthetically active radiation at the chamber, in μmol m<sup>-2</sup> s<sup>-1</sup>
-    - _PAR_above_canopy_: PAR above canopy, in μmol m<sup>-2</sup> s<sup>-1</sup>
-	- _TL_: Leaf temperature, in °C
-	- _TA_: Air temperature, in °C
-	- _VPD_: Vapour pressure deficit, in Pa
-	- _SWC_: Soil water content, averaged from 10-30cm depth, in %
-2. **all_summarised_daily.csv:** Data of *data_full.csv* summarised daily midday
-3. **01_CO_figures.ipynb:** Used to create figures for the main article and supplement. Dependencies are:
+    - _species_: Plant type, where Nit-A is *P. nitida* adult, Nit-S is *P. nitida* seedling, and Rep-S is *P. repens* seedling
+    - _leaf_age_: Leaf cohort, defined as Yng, Mid, or Old
+    - _season_: Sampling season, defined as autumn, winter, spring, or summer
+    - _daytime_: Sampling period, defined as morning, noon, or afternoon
+    - _gsw_: Stomatal conductance to water vapour, in mol m<sup>-2</sup> s<sup>-1</sup>
+    - _E_apparent_: Apparent transpiration rate
+    - _PhiPS2_: Operating efficiency of photosystem II
+    - _ETR_: Electron transport rate
+    - _VPDleaf_: Leaf vapour pressure deficit
+    - _SWC_: Soil water content matched from the site meteorological data
+    - _gpp_umol_m2_s1_: Gross primary productivity derived from Eddy Covariance processing
+2. **data/li600_dataset_summarised.csv:** Summarised LI-600F dataset aggregated by timestamp, species, season, daytime, and leaf age. Contains median and standard deviation values used for statistical modelling and figure generation.
+3. **data/li6400_dataset.csv:** LI-6400 gas-exchange dataset containing light-response curves, fluorescence light-response curves, and A-Ci measurements. Contains photosynthetic gas exchange variables, fluorescence variables, plant metadata, and matched environmental variables.
+4. **data/lrc_fitted.csv:** Fitted light-response curve parameter table derived from Marshall-Biscoe model fits. Contains fitted parameters and derived values including _Asat_net_ and _Km_net_.
+5. **data/coef_table_appendix.csv:** Appendix coefficient table linking stomatal conductance and electron transport rate relationships by species or plant type and leaf age.
+6. **data/Leaf_morph.xlsx:** Leaf morphology measurements by species or plant type, leaf age, and specimen. Contains leaf length, width, and length/width ratio.
+7. **data/Chlorophyll Content.xlsx:** Chlorophyll content measurements by barcode, including chlorophyll content and chlorophyll fluorescence ratio.
+8. **stat/:** Statistical analysis and figure-generation scripts for the manuscript. Analyses use Python and R, with dependencies including:
     - [Pandas](https://pandas.pydata.org/)
-    - [Numpy](https://numpy.org/)
-    - [Plotnine](https://plotnine.readthedocs.io/en/stable/) & [Mizani](https://plotnine.readthedocs.io/en/stable/tutorials/miscellaneous-manipulating-date-breaks-and-date-labels.html)
-4. **02_GAM.R:** Generalised Additive Model development
+    - [NumPy](https://numpy.org/)
+    - [SciPy](https://scipy.org/)
+    - [ggplot2](https://ggplot2.tidyverse.org/)
+    - [ggpubr](https://rpkgs.datanovia.com/ggpubr/)
+    - [glmmTMB](https://glmmtmb.github.io/glmmTMB/)
+    - [emmeans](https://cran.r-project.org/web/packages/emmeans/index.html)
     - [mgcv](https://cran.r-project.org/web/packages/mgcv/index.html)
-	- [ggplot2](https://ggplot2.tidyverse.org/)
-	- Other packages, see header of R code file
+    - [photosynthesis](https://cran.r-project.org/web/packages/photosynthesis/index.html)
+
+Raw Eddy Covariance data used for auxiliary meteorological context are not fully redistributed in this repository. These data are available on request from SAEON Fynbos ([https://fynbos.saeon.ac.za/](https://fynbos.saeon.ac.za/)).
 
 ## How to Cite
 
-Muller et al. (2025). *Leaf carbon monoxide emissions under different drought, heat, and light conditions in the field*. New Phytologist. DOI: https://doi.org/10.1111/nph.20424
-
-[![DOI:10.1111/nph.20424](http://img.shields.io/badge/DOI-10.1111/nph.20424-a7d37d.svg)](https://doi.org/10.1111/nph.20424)
+Muller, J. D., Ramsay, E., Carkeek, R., & Midgley, G. F. (draft manuscript). *Life-history trade-offs in the regeneration niche: Post-fire seeding vs. resprouting in Fynbos Proteaceae*.
 
 ## License
 
-This software is distributed under the GNU GPL version 3
-
+This repository is distributed under the Creative Commons Attribution-NonCommercial-ShareAlike license (CC BY-NC-SA 4.0).
