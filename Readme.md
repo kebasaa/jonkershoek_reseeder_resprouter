@@ -3,7 +3,7 @@
 ![Pandas](https://img.shields.io/badge/pandas-%23150458.svg?style=for-the-badge&logo=pandas&logoColor=white)
 ![NumPy](https://img.shields.io/badge/numpy-%23013243.svg?style=for-the-badge&logo=numpy&logoColor=white)
 
-
+[![DOI](https://zenodo.org/badge/1255782652.svg)](https://doi.org/10.5281/zenodo.20540694)
 [![License: CC BY-NC-SA](https://img.shields.io/badge/License-CC%20BY--NC--SA-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 
 # Data & code for article on reseeding and resprouting strategies
