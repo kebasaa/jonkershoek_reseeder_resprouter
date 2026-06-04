@@ -12,6 +12,14 @@ The code and datasets in this repository are complementary to the draft manuscri
 
 This study investigates how post-fire reseeding and resprouting strategies differ in their leaf-level physiology in a fire-prone, summer-drought Fynbos ecosystem. Using measurements from *Protea repens* seedlings, *Protea nitida* seedlings, and *P. nitida* adults at the Jonkershoek Fynbos research site, the project links stomatal conductance, photosynthetic capacity, chlorophyll fluorescence, leaf traits, and meteorological/Eddy Covariance context to test how reseeders and resprouters balance rapid carbon gain against drought resilience during post-fire recovery.
 
+## Dataset Authorship and Ownership
+
+**Dataset creators:** J. D. Muller; E. Ramsay; R. Carkeek; and G. F. Midgley.
+
+**Author affiliation:** School for Climate Studies, Stellenbosch University, South Africa.
+
+**Data owner:** [School for Climate Studies, Stellenbosch University](https://climate.sun.ac.za/), South Africa, except where noted for third-party data sources.
+
 Leaf-level screening measurements in files beginning with **li600** were made with a [LI-COR LI-600/LI-600F Porometer/Fluorometer](https://www.licor.com/products/LI-600), a compact handheld instrument for rapid ambient leaf-level measurements of stomatal conductance and chlorophyll a fluorescence, especially for broadleaf measurements. Gas-exchange response-curve measurements in files beginning with **li6400** were made with a LI-COR LI-6400 Portable Photosynthesis System, a portable photosynthesis and gas-exchange system supporting light-response curves, CO<sub>2</sub>-response curves, chamber environmental control, and optional leaf chamber fluorescence workflows ([manuals](https://cloud.licor.com/env/support/LI-6400/manuals.html)).
 
 The following files are available:
