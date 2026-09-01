@@ -72,12 +72,7 @@ plt = plt + labs(x='Group',
 plt = plt + scale_colour_manual(values=cbPalette) + scale_fill_manual(values=cbPalette)
 plt = plt + theme_bw()
 plt = plt + theme(text=element_text(family="serif"),
-                  #legend.justification=c(0.5, 0.5), 
-                  #legend.position=c(0.5, 0.5),
                   axis.text.x = element_text(angle = -45, vjust = 1, hjust=0))
-#plt = plt + geom_text(data=n_labels, aes(x=factor(species), y=-0.005, label=Freq), position = position_dodge2(width = .75), size=3, family="serif")
-#plt = plt + facet_grid('season ~ leaf_age')
-#plt = plt + coord_cartesian(ylim = c(-0.005,0.2)) # Zoom in
 plt
 
 # 2) Figure for chl. content ####
@@ -105,7 +100,6 @@ plt = plt + labs(x='Group',
 my_comparisons <- list( c("Nit-S", "Rep-S"), c("Nit-S", "Nit-A"), c("Rep-S", "Nit-A"))
 # Add p-values comparing groups
 plt = plt + stat_compare_means(aes(x="species", y="chl_mg.m2"), comparisons = my_comparisons, label="p.signif")  # Add pairwise comparisons p-value
-#plt = plt + stat_compare_means(label.y = 0.4)
 plt = plt + facet_wrap('~ leaf_age')
 plt = plt + theme(axis.title.x = element_blank(), #axis.title.y = element_blank(),
                   axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1),

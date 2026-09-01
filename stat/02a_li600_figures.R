@@ -1,18 +1,8 @@
 # Header ####
 
-# library(here)
-# library(psych)
-# library(dplyr)
-# library(readr)
-# library(agricolae)
-# library(knitr)
-# library(kableExtra)
 library(ggplot2)
 library(ggpubr)
 library(tidyr)
-
-# The original script relied on these being attached from an interactive session,
-# so it fails under Rscript. Loading them explicitly changes no result.
 library(dplyr)
 library(rlang)
 library(lme4)
@@ -21,9 +11,9 @@ library(emmeans)
 library(DHARMa)
 library(rstatix)
 
-# Compact letter display from a table of pairwise p-values (Reviewer comment 3).
+# Compact letter display from a table of pairwise p-values.
 # Groups are collected into maximal cliques of pairwise non-significant
-# comparisons; untested pairs count as "not different". No new package needed.
+# comparisons; untested pairs count as "not different".
 cld_from_pairs <- function(group1, group2, p_adj, all_groups, alpha = 0.05) {
   group1 <- as.character(group1)
   group2 <- as.character(group2)
@@ -108,7 +98,7 @@ df$date <- substr(df$timestamp, 1, 10)
 # VPD leaf and VP leaf
 # Fs: steady state fluorescence
 # Fm': maximum fluorescence from PSII during photosynthesis under light conditions when a saturating pulse of light is applied
-# Tleaf: 
+# Tleaf: Leaf temperature
 
 
 # 2) Boxplot (example) ####
@@ -241,48 +231,9 @@ ggsave(paste0(graphs_path, 'all_groups_ETR.jpg'), width=21, height=14, units = "
 
 
 # 3) Boxplot (Fig 2) gsw, ETR, PhiPS2 ####
-# - - - - - - - - - - - - - - - - - - - -
-# 
-# df$date <- strftime(df$timestamp, '%Y-%m-%d')
-# 
-# # Median within each date, species, leaf age, specimen
-# # Excluding 1 July 2023, due to outliers. Erin said the leaves were wet
-# library(dplyr)
-# df_summary <- df[which(df$date != '2023-06-01'),] %>%
-#   group_by(date, species, leaf_age, specimen, season, daytime) %>%
-#   summarize(across(where(is.numeric), ~ median(.x, na.rm = TRUE)),
-#             .groups = "drop")
-# graph_df <- df_summary[,c("date","season", "daytime", "species", "leaf_age","gsw","ETR","PhiPS2")] %>% 
-#   pivot_longer(
-#     cols = -c(date, season, daytime, species, leaf_age),
-#     names_to = "variable",
-#     values_to = "value"
-#   )
-# graph_df <- as.data.frame(graph_df)
-# 
-# graph_df$var_label <- NA
-# graph_df[which(graph_df$variable == 'gsw'),]$var_label = 'g[sw]'
-# graph_df[which(graph_df$variable == 'ETR'),]$var_label = 'ETR'
-# graph_df[which(graph_df$variable == 'PhiPS2'),]$var_label = 'Phi[PSII]'
-# graph_df$var_label <- factor(graph_df$var_label, levels = c("g[sw]", "ETR", "Phi[PSII]"))
-# 
-# plt = ggboxplot(graph_df, x = "species", y = "value")
-# my_comparisons <- list( c("Nit-A", "Nit-S"), c("Nit-S", "Rep-S"), c("Nit-A", "Rep-S"))
-# plt = plt + stat_compare_means(aes(x="species", y="value"), comparisons = my_comparisons,
-#                                label="p.signif", vjust = 0.15)  # Add pairwise comparisons p-value
-# #plt = plt + stat_compare_means(label.y = 0.4)
-# plt = plt + facet_grid('var_label ~ season', scales="free_y", labeller = labeller(var_label = label_parsed))
-# plt = plt + theme(axis.title.x = element_blank(), axis.title.y = element_blank(),
-#                   axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1),
-#                   text=element_text(family="serif"))
-# plt
-# ggsave(paste0(graphs_path, 'gsw_ETR_PhiPS2_season.jpg'), width=20, height=20, units = "cm", scale=1.25, dpi = 600)
-# ggsave(paste0(graphs_path, 'gsw_ETR_PhiPS2_season.pdf'), width=20, height=20, units = "cm", scale=1.25, dpi = 600)
-# 
-# graph_df
 
-# 3b) Boxplot with LMM ####
-# - - - - - - - - - - - - -
+# Boxplot with LMM
+# - - - - - - - - 
 
 # 1) Aggregation function (your df2 -> df_summary steps wrapped)
 aggregate_to_sampling_unit <- function(df,
@@ -815,14 +766,12 @@ plt = ggboxplot(graph_df[which(graph_df['variable'] == "VPDleaf"),], x = "specie
 my_comparisons <- list( c("Nit-A", "Nit-S"), c("Nit-S", "Rep-S"), c("Nit-A", "Rep-S"))
 plt = plt + stat_compare_means(aes(x="species", y="value"), comparisons = my_comparisons,
                                label="p.signif", vjust = 0.15)  # Add pairwise comparisons p-value
-#plt = plt + stat_compare_means(label.y = 0.4)
 plt = plt + facet_grid('season ~ daytime', scales="free_y", labeller = labeller(variable = label_parsed))
 plt = plt + theme(axis.title.x = element_blank(), #axis.title.y = element_blank(),
                   axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1),
                   strip.text = element_text(size = 12),
                   text=element_text(family="serif"))
 plt = plt + labs(y="VPD [kPa]")
-#plt = plt + coord_cartesian(ylim = c(0, 0.3))
 plt
 ggsave(paste0(graphs_path, 'supplement/groups_daytime_VPD.jpg'), width=20, height=20, units = "cm", scale=1.25, dpi = 600)
 ggsave(paste0(graphs_path, 'supplement/groups_daytime_VPD.pdf'), width=20, height=20, units = "cm", scale=1.25, dpi = 600)
@@ -831,14 +780,12 @@ plt = ggboxplot(graph_df[which(graph_df['variable'] == "Tleaf"),], x = "species"
 my_comparisons <- list( c("Nit-A", "Nit-S"), c("Nit-S", "Rep-S"), c("Nit-A", "Rep-S"))
 plt = plt + stat_compare_means(aes(x="species", y="value"), comparisons = my_comparisons,
                                label="p.signif", vjust = 0.15)  # Add pairwise comparisons p-value
-#plt = plt + stat_compare_means(label.y = 0.4)
 plt = plt + facet_grid('season ~ daytime', scales="free_y", labeller = labeller(variable = label_parsed))
 plt = plt + theme(axis.title.x = element_blank(),
                   axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1),
                   strip.text = element_text(size = 12),
                   text=element_text(family="serif"))
 plt = plt + labs(y=expression(paste("T"["L"]," [°C]")))
-#plt = plt + coord_cartesian(ylim = c(0, 0.3))
 plt
 ggsave(paste0(graphs_path, 'supplement/groups_daytime_TL.jpg'), width=20, height=20, units = "cm", scale=1.25, dpi = 600)
 ggsave(paste0(graphs_path, 'supplement/groups_daytime_TL.pdf'), width=20, height=20, units = "cm", scale=1.25, dpi = 600)
@@ -860,14 +807,12 @@ plt = ggboxplot(graph_df[which(graph_df['variable'] == "gsw"),], x = "leaf_age",
 my_comparisons <- list( c("Yng", "Mid"), c("Yng", "Old"), c("Mid", "Old"))
 plt = plt + stat_compare_means(aes(x="leaf_age", y="value"), comparisons = my_comparisons,
                                label="p.signif", vjust = 0.15)  # Add pairwise comparisons p-value
-#plt = plt + stat_compare_means(label.y = 0.4)
 plt = plt + facet_grid('season ~ species', scales="free_y", labeller = labeller(variable = label_parsed))
 plt = plt + theme(axis.title.x = element_blank(), #axis.title.y = element_blank(),
                   axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1),
                   strip.text = element_text(size = 12),
                   text=element_text(family="serif"))
 plt = plt + labs(y=expression(paste('Stomatal conductance ', 'g'['sw'],' [mol m'^'-2','s'^'-1',']')))
-#plt = plt + coord_cartesian(ylim = c(0, 0.3))
 plt
 ggsave(paste0(graphs_path, 'supplement/groups_leafage_gsw.jpg'), width=20, height=20, units = "cm", scale=1.25, dpi = 600)
 ggsave(paste0(graphs_path, 'supplement/groups_leafage_gsw.pdf'), width=20, height=20, units = "cm", scale=1.25, dpi = 600)
@@ -876,14 +821,12 @@ plt = ggboxplot(graph_df[which(graph_df['variable'] == "ETR"),], x = "leaf_age",
 my_comparisons <- list( c("Yng", "Mid"), c("Yng", "Old"), c("Mid", "Old"))
 plt = plt + stat_compare_means(aes(x="leaf_age", y="value"), comparisons = my_comparisons,
                                label="p.signif", vjust = 0.15)  # Add pairwise comparisons p-value
-#plt = plt + stat_compare_means(label.y = 0.4)
 plt = plt + facet_grid('season ~ species', scales="free_y", labeller = labeller(variable = label_parsed))
 plt = plt + theme(axis.title.x = element_blank(), #axis.title.y = element_blank(),
                   axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1),
                   strip.text = element_text(size = 12),
                   text=element_text(family="serif"))
 plt = plt + labs(y=expression(paste('ETR',' [',mu,'mol m'^'-2','s'^'-1',']')))
-#plt = plt + coord_cartesian(ylim = c(0, 0.3))
 plt
 ggsave(paste0(graphs_path, 'supplement/groups_leafage_etr.jpg'), width=20, height=20, units = "cm", scale=1.25, dpi = 600)
 ggsave(paste0(graphs_path, 'supplement/groups_leafage_etr.pdf'), width=20, height=20, units = "cm", scale=1.25, dpi = 600)
@@ -893,14 +836,12 @@ plt = ggboxplot(graph_df[which(graph_df$variable == "PhiPS2"),], x = "leaf_age",
 my_comparisons <- list( c("Yng", "Mid"), c("Yng", "Old"), c("Mid", "Old"))
 plt = plt + stat_compare_means(aes(x="leaf_age", y="value"), comparisons = my_comparisons,
                                label="p.signif", vjust = 0.15)  # Add pairwise comparisons p-value
-#plt = plt + stat_compare_means(label.y = 0.4)
 plt = plt + facet_grid('season ~ species', scales="free_y", labeller = labeller(variable = label_parsed))
 plt = plt + theme(axis.title.x = element_blank(), #axis.title.y = element_blank(),
                   axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1),
                   strip.text = element_text(size = 12),
                   text=element_text(family="serif"))
 plt = plt + labs(y=expression(paste(Phi['PSII'],' [unitless]')))
-#plt = plt + coord_cartesian(ylim = c(0, 0.3))
 plt
 ggsave(paste0(graphs_path, 'supplement/groups_leafage_phips2.jpg'), width=20, height=20, units = "cm", scale=1.25, dpi = 600)
 ggsave(paste0(graphs_path, 'supplement/groups_leafage_phips2.pdf'), width=20, height=20, units = "cm", scale=1.25, dpi = 600)

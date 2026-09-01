@@ -60,10 +60,6 @@ r2_list <- function(model_list){
 # https://towardsdatascience.com/producing-insights-with-generalized-additive-models-gams-cf2b68b1b847
 
 df <- read.csv(paste0(data_path, 'li600_dataset_summarised.csv'))
-# df$species  <- factor(df$species, levels = c("Nit-A", "Nit-S", "Rep-S"))
-# df$season   <- factor(df$season, levels = c("autumn", "winter", "spring", "summer"))
-# df$leaf_age <- factor(df$leaf_age, levels = c("Yng", "Mid", "Old"))
-# df$daytime  <- factor(df$daytime, levels = c("morning", "noon", "afternoon"))
 
 temp <- df
 
@@ -182,14 +178,11 @@ plt = plt + geom_ribbon(aes(ymin=visregLwr, ymax=visregUpr), alpha=0.5, colour=N
 plt = plt + p_annot("VPDleaf_median")
 plt = plt + scale_y_continuous(expand = expansion(mult = c(0.05, 0.28)))
 plt = plt + geom_line()
-#plt = plt + annotate("text", x = min(p2$data$x), y = max(p2$data$y) + 1, label = "(a)",
-#                     size = 5, hjust = 0, vjust = 1, family='serif')
 plt = plt + scale_colour_manual(values=cbPalette)  + scale_fill_manual(values=cbPalette)
 plt = plt + labs(x = expression(paste("VPD"["L"]," [kPa]")),
                  y = expression(paste(g['sw']," [",mol~m^{-2}~s^{-1},"]")),
                  colour='Type', fill='Type', linetype='Type')
 plt = plt + theme_bw()
-#plt = plt + theme(legend.position="bottom", text=element_text(family="serif"))
 plt = plt + theme(legend.position.inside = c(0.18, 0.80), text=element_text(family="serif"),
                   plot.title = element_text(hjust = 0.5))
 plt = plt + ggtitle( expression(paste('VPD'['L'],' contribution to ','g'['sw'])))
@@ -205,14 +198,11 @@ plt = plt + geom_ribbon(aes(ymin=visregLwr, ymax=visregUpr), alpha=0.5, colour=N
 plt = plt + p_annot("Qamb_median")
 plt = plt + scale_y_continuous(expand = expansion(mult = c(0.05, 0.28)))
 plt = plt + geom_line()
-#plt = plt + annotate("text", x = min(p2$data$x), y = max(p2$data$y) + 1, label = "(a)",
-#                     size = 5, hjust = 0, vjust = 1, family='serif')
 plt = plt + scale_colour_manual(values=cbPalette)  + scale_fill_manual(values=cbPalette)
 plt = plt + labs(x = expression(paste("PAR"[L]," [",mu,mol~m^{-2}~s^{-1},"]")),
                  y = expression(paste(g['sw']," [",mol~m^{-2}~s^{-1},"]")),
                  colour='Type', fill='Type', linetype='Type')
 plt = plt + theme_bw()
-#plt = plt + theme(legend.position="bottom", text=element_text(family="serif"))
 plt = plt + theme(legend.position.inside = c(0.18, 0.80), text=element_text(family="serif"),
                   plot.title = element_text(hjust = 0.5))
 plt = plt + ggtitle( expression(paste('PAR'[L],' contribution to ','g'['sw'])))
@@ -227,14 +217,11 @@ plt = plt + geom_ribbon(aes(ymin=visregLwr, ymax=visregUpr), alpha=0.5, colour=N
 plt = plt + p_annot("SWC_1_1_1")
 plt = plt + scale_y_continuous(expand = expansion(mult = c(0.05, 0.28)))
 plt = plt + geom_line()
-#plt = plt + annotate("text", x = min(p2$data$x), y = max(p2$data$y) + 1, label = "(a)",
-#                     size = 5, hjust = 0, vjust = 1, family='serif')
 plt = plt + scale_colour_manual(values=cbPalette)  + scale_fill_manual(values=cbPalette)
 plt = plt + labs(x = expression(paste("SWC [%]")),
                  y = expression(paste(g['sw']," [",mol~m^{-2}~s^{-1},"]")),
                  colour='Type', fill='Type', linetype='Type')
 plt = plt + theme_bw()
-#plt = plt + theme(legend.position="bottom", text=element_text(family="serif"))
 plt = plt + theme(legend.position.inside = c(0.18, 0.80), text=element_text(family="serif"),
                   plot.title = element_text(hjust = 0.5))
 plt = plt + ggtitle( expression(paste('SWC contribution to ','g'['sw'])))
@@ -249,14 +236,11 @@ plt = plt + geom_ribbon(aes(ymin=visregLwr, ymax=visregUpr), alpha=0.5, colour=N
 plt = plt + p_annot("co2_mole_fraction")
 plt = plt + scale_y_continuous(expand = expansion(mult = c(0.05, 0.28)))
 plt = plt + geom_line()
-#plt = plt + annotate("text", x = min(p2$data$x), y = max(p2$data$y) + 1, label = "(a)",
-#                     size = 5, hjust = 0, vjust = 1, family='serif')
 plt = plt + scale_colour_manual(values=cbPalette)  + scale_fill_manual(values=cbPalette)
 plt = plt + labs(x = expression(paste(x[CO['2']]," [",mu,mol~mol^{-1},"]")),
                  y = expression(paste(g['sw']," [",mol~m^{-2}~s^{-1},"]")),
                  colour='Type', fill='Type', linetype='Type')
 plt = plt + theme_bw()
-#plt = plt + theme(legend.position="bottom", text=element_text(family="serif"))
 plt = plt + theme(legend.position.inside = c(0.18, 0.80), text=element_text(family="serif"),
                   plot.title = element_text(hjust = 0.5))
 plt = plt + ggtitle( expression(paste(x[CO['2']],' contribution to ','g'['sw'])))
@@ -410,14 +394,7 @@ m15 <- gam(gsw_median ~ s(VPDleaf_median, by=species, k=5) +
           data=temp2, method='REML', select=T)
 
 
-# # FINAL MODEL
-# # In spite of having 3x3 (leaf ages & daytimes) datapoints per species per day, I still have significant results!
-# mX <- gam(gsw_median ~ s(VPDleaf_median, by=species, k=5) +
-#             s(SWC_1_1_1, by=species, k=5) +
-#             s(co2_mole_fraction, by=species, k=5) +
-#             s(Qamb_median, by=species, k=4) +
-#             species,
-#           data=temp2, method='REML', select=T)
+# FINAL MODEL
 
 m16 <- gam(gsw_median ~ s(VPDleaf_median, by=species, k=5) +
              s(co2_mole_fraction, by=species, k=5) +
@@ -455,8 +432,6 @@ plt <- plt + theme(legend.position = "right",
                                    text=element_text(family="serif"),
                                    plot.title = element_text(hjust = 0.5))
 plt <- plt + ggtitle(expression(paste("Droughted: ",'g'['t,CO'],' & Tr contrib. to f'['CO'])))
-#plt <- plt + labs(x=expression(paste("time_since_last_event_s")),
-#                  y=expression(paste("P_cum_mm")))
 plt
 
 plt <- draw(mX, contour = T, n = 50, select=6, too.far = 0.002)
@@ -470,8 +445,6 @@ plt <- plt + theme(legend.position = "right",
                    text=element_text(family="serif"),
                    plot.title = element_text(hjust = 0.5))
 plt <- plt + ggtitle(expression(paste("Droughted: ",'g'['t,CO'],' & Tr contrib. to f'['CO'])))
-#plt <- plt + labs(x=expression(paste("time_since_last_event_s")),
-#                  y=expression(paste("P_cum_mm")))
 plt
 
 #plot(mX)
@@ -491,14 +464,11 @@ plt = ggplot(p$fit, aes(PAR, visregFit, linetype=treatment, fill=treatment, colo
 plt = plt + geom_point(data=p2$data, aes(x=x, y=y, colour=treatment), size=0.75)
 plt = plt + geom_ribbon(aes(ymin=visregLwr, ymax=visregUpr), alpha=0.5, colour=NA)
 plt = plt + geom_line()
-#plt = plt + annotate("text", x = min(p2$data$x), y = max(p2$data$y) + 1, label = "(a)",
-#                     size = 5, hjust = 0, vjust = 1, family='serif')
 plt = plt + scale_colour_manual(values=cbPalette)  + scale_fill_manual(values=cbPalette)
 plt = plt + labs(x = expression(paste("PAR [",mu,mol~m^{-2}~s^{-1},"]")),
                  y = expression(paste(c['CO,i']," [",nmol~mol^{-1},"]")),
                  colour='Treatment', fill='Treatment', linetype='Treatment')
 plt = plt + theme_bw()
-#plt = plt + theme(legend.position="bottom", text=element_text(family="serif"))
 plt = plt + theme(legend.position = c(0.18, 0.80), text=element_text(family="serif"),
                   plot.title = element_text(hjust = 0.5))
 plt = plt + ggtitle( expression(paste('PAR contribution to ','c'['CO,i'])))
@@ -514,14 +484,11 @@ plt = ggplot(p$fit, aes(TL, visregFit, linetype=treatment, fill=treatment, colou
 plt = plt + geom_point(data=p2$data, aes(x=x, y=y, colour=treatment), size=0.75)
 plt = plt + geom_ribbon(aes(ymin=visregLwr, ymax=visregUpr), alpha=0.5, colour=NA)
 plt = plt + geom_line()
-#plt = plt + annotate("text", x = min(p2$data$x), y = max(p2$data$y) + 1, label = "(a)",
-#                     size = 5, hjust = 0, vjust = 1, family='serif')
 plt = plt + scale_colour_manual(values=cbPalette)  + scale_fill_manual(values=cbPalette)
 plt = plt + labs(x = expression(paste('T'[L]," [°C]")),
                  y = expression(paste(c['CO,i']," [",nmol~mol^{-1},"]")),
                  colour='Treatment', fill='Treatment', linetype='Treatment')
 plt = plt + theme_bw()
-#plt = plt + theme(legend.position="bottom", text=element_text(family="serif"))
 plt = plt + theme(legend.position = c(0.18, 0.80), text=element_text(family="serif"),
                   plot.title = element_text(hjust = 0.5))
 plt = plt + ggtitle( expression(paste('T'['L']," contribution to ",'c'['CO,i'])))
@@ -531,35 +498,10 @@ ggsave(paste0(graphs_path, 'model2b_output_TL.jpg'), width=8, height=8, units = 
 ggsave(paste0(graphs_path, 'model2b_output_TL.pdf'), width=8, height=8, units = "cm", dpi = 1200)
 
 # FLUX
-#m_cof <- gam(co.flux ~ te(H2Oi, Tr, by=treatment, k=4) + treatment,
-#            data=temp, method='REML', select=T)
 m_cof <- gam(co.flux ~ te(Tr, g_tCO, by=treatment, k=4) + treatment,
              data=temp, method='REML', select=T) # Dan wants me to drop H2Oi
 summary(m_cof)
 AIC(m_cof)
-# p = visreg(m_cof,"COi", by="treatment", data = temp,  method = "REML", overlay=T, plot = F,
-#            partial = F, rug = F)
-# p2 = visreg(m_cof, xvar = 'COi', by='treatment', data = temp, gg=T, method = "REML", overlay=T)
-# plt = ggplot(p$fit, aes(COi, visregFit, linetype=treatment, fill=treatment, colour=treatment))
-# plt = plt + geom_point(data=p2$data, aes(x=x, y=y, colour=treatment), size=0.75)
-# plt = plt + geom_ribbon(aes(ymin=visregLwr, ymax=visregUpr), alpha=0.5, colour=NA)
-# plt = plt + geom_line()
-# #plt = plt + annotate("text", x = min(p2$data$x), y = max(p2$data$y) + 1, label = "(a)",
-# #                     size = 5, hjust = 0, vjust = 1, family='serif')
-# plt = plt + scale_colour_manual(values=cbPalette)  + scale_fill_manual(values=cbPalette)
-# plt = plt + labs(x = expression(paste('c'['CO,i']," [",nmol~mol^{-1},"]")),
-#                  y = expression(paste('Part. contribution to  ','f'['CO']," [",nmol~m^{-2}~s^{-1},"]")),
-#                  colour='Treatment', fill='Treatment', linetype='Treatment')
-# plt = plt + theme_bw()
-# #plt = plt + theme(legend.position="bottom", text=element_text(family="serif"))
-# plt = plt + theme(legend.position = c(0.18, 0.80), text=element_text(family="serif"),
-#                   plot.title = element_text(hjust = 0.5))
-# plt = plt + ggtitle( expression(paste('c'['CO,i'],' contribution to f'['CO'])))
-# plt = plt + coord_cartesian(ylim= c(-0.5,3.5))
-# plt_cof_coi <- plt
-# plt_cof_coi
-# ggsave(paste0(graphs_path, 'model3a_output_COi.jpg'), width=8, height=8, units = "cm", dpi = 1200)
-# ggsave(paste0(graphs_path, 'model3a_output_COi.pdf'), width=8, height=8, units = "cm", dpi = 1200)
 
 
 library(gratia)
@@ -584,9 +526,6 @@ plt_cof_dro <- plt_cof_dro + theme_bw()
 plt_cof_dro <- plt_cof_dro + theme(legend.position = "right",
                                    text=element_text(family="serif"),
                                    plot.title = element_text(hjust = 0.5))
-# plt_cof_dro <- plt_cof_dro + ggtitle(expression(paste("Dro: ",'c'['H2O,i'],' & Tr contrib. to f'['CO'])))
-# plt_cof_dro <- plt_cof_dro + labs(x=expression(paste(c[paste(H[2],"O,i")]," [mmol ",mol^{-1},"]")),
-#                                   y=expression(paste(Tr," [",mmol~m^{-2}~s^{-1},"]")))
 plt_cof_dro <- plt_cof_dro + ggtitle(expression(paste("Droughted: ",'g'['t,CO'],' & Tr contrib. to f'['CO'])))
 plt_cof_dro <- plt_cof_dro + labs(y=expression(paste(g[paste("t,CO")]," [mol ",mol^{-2}," ",s^{-1},"]")),
                                   x=expression(paste(Tr," [",mmol~m^{-2}~s^{-1},"]")))
@@ -595,8 +534,6 @@ ggsave(paste0(graphs_path, 'model3b_output_interaction_H2Oi_Tr.jpg'), width=8, h
 ggsave(paste0(graphs_path, 'model3b_output_interaction_H2Oi_Tr.pdf'), width=8, height=8, units = "cm", dpi = 1200)
 
 
-# m_cof_irr <- gam(co.flux ~ te(H2Oi, Tr, k=4),
-#                  data=temp[which((temp$treatment == 'irr')),], method='REML', select=T)
 m_cof_irr <- gam(co.flux ~ te(Tr, g_tCO, k=4),
                  data=temp[which((temp$treatment == 'irr')),], method='REML', select=T)
 plt_cof_irr <- draw(m_cof_irr, contour = T, n = 50, select=1)
@@ -609,9 +546,6 @@ plt_cof_irr <- plt_cof_irr + theme_bw()
 plt_cof_irr <- plt_cof_irr + theme(legend.position = "right",
                                    text=element_text(family="serif"),
                                    plot.title = element_text(hjust = 0.5))
-# plt_cof_irr <- plt_cof_irr + ggtitle(expression(paste("Irr: ",'c'['H2O,i'],' & Tr contrib. to f'['CO'])))
-# plt_cof_dro <- plt_cof_dro + labs(x=expression(paste(c[paste(H[2],"O,i")]," [mmol ",mol^{-1},"]")),
-#                                   y=expression(paste(Tr," [",mmol~m^{-2}~s^{-1},"]")))
 plt_cof_irr <- plt_cof_irr + ggtitle(expression(paste("Irrigated: ",'g'['t,CO'],' & Tr contrib. to f'['CO'])))
 plt_cof_irr <- plt_cof_irr + labs(y=expression(paste(g[paste("t,CO")]," [mol ",mol^{-2}," ",s^{-1},"]")),
                                   x=expression(paste(Tr," [",mmol~m^{-2}~s^{-1},"]")))
@@ -620,23 +554,8 @@ plt_cof_irr
 ggsave(paste0(graphs_path, 'model3c_output_interaction_H2Oi_Tr.jpg'), width=8, height=8, units = "cm", dpi = 1200)
 ggsave(paste0(graphs_path, 'model3c_output_interaction_H2Oi_Tr.pdf'), width=8, height=8, units = "cm", dpi = 1200)
 
-# library(grImport2)
-# library(rsvg)
-# rsvg::rsvg_svg("../graphs/model1_outline.svg", "../graphs/model1_outline2.svg")
-# raw <- grImport2::readPicture("C:/Users/Jonathan/Documents/_research_statistics/2.6 - CO branch chambers/graphs/model1_outline2.svg")
-# grob <- grImport2::pictureGrob(raw, just = c("left",'bottom'), x=unit(0, "cm"), y = unit(0, "cm"))
-
 library(ggpubr)
 library(cowplot)
-# ggarrange(grob, plt_cof_coi,
-#           plt_coi_par, plt_cof_irr,
-#           plt_coi_tl, plt_cof_dro, 
-#           labels = c("(1)",  "(3a)",
-#                      "(2a)", "(3b)",
-#                      "(2b)", "(3c)"),
-#           ncol = 2, nrow = 3)
-# ggsave(paste0(graphs_path, 'model_output_all.jpg'), width = 20, height = 27, units = "cm", dpi = 1200)
-# ggsave(paste0(graphs_path, 'model_output_all.pdf'), width = 20, height = 27, units = "cm", dpi = 1200)
 
 legend <- get_legend(plt_cof_irr)
 plt_cof_irr2 <- plt_cof_irr + theme(legend.position = "none")
