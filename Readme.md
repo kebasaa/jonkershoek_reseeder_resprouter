@@ -31,10 +31,7 @@ The following files are available:
 5. **data/coef_table_appendix.csv:** Appendix coefficient table linking stomatal conductance and electron transport rate relationships by species or plant type and leaf age. [Column metadata](metadata/coef_table_appendix_metadata.md)
 6. **data/Leaf_morph.xlsx:** Leaf morphology measurements by species or plant type, leaf age, and specimen. [Column metadata](metadata/Leaf_morph_metadata.md)
 7. **data/Chlorophyll Content.xlsx:** Chlorophyll content measurements by barcode. [Column metadata](metadata/Chlorophyll Content_metadata.md)
-8. **stat/:** Statistical analysis and figure-generation scripts for the manuscript. Analyses use Python and R, with dependencies including:
-    - [Pandas](https://pandas.pydata.org/)
-    - [NumPy](https://numpy.org/)
-    - [SciPy](https://scipy.org/)
+8. **stat/:** Statistical analysis and figure-generation scripts for the manuscript. Analyses use R, with dependencies including:
     - [ggplot2](https://ggplot2.tidyverse.org/)
     - [ggpubr](https://rpkgs.datanovia.com/ggpubr/)
     - [glmmTMB](https://glmmtmb.github.io/glmmTMB/)
